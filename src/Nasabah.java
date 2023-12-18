@@ -12,13 +12,20 @@ public class Nasabah {
     // double saldo;
     // double pinjaman = 0;
 
+    Tabungan tabungan; 
+
     public Nasabah(String nama, String userId, String alamat) {
         this.nama = nama;
         this.userId = userId;
         this.alamat = alamat;
         this.nomorRekening = generateNomorRekening();
+        this.tabungan = new Tabungan(0, 0); 
         // this.saldo = saldo;
         // this.pinjaman = pinjaman;
+    }
+
+    public Tabungan getTabungan() {
+        return tabungan;
     }
 
     private static String generateNomorRekening() {
@@ -65,13 +72,14 @@ public class Nasabah {
 
             Nasabah nasabah = findNasabah(userId, nasabahList);
             if (nasabah != null) {
-                Tabungan tabungan = new Tabungan();
+                Tabungan tabungan = nasabah.getTabungan(); 
+
 
                 int choice;
                 do {
                     System.out.println("SALDO \t \t : " + tabungan.getSaldo());
-                    System.out.println("PINJAMAN \t : " + tabungan.getPinjaman());
-                    System.out.println("==================MENU NASABAH===================\n1. Tambah Simpanan\n2. Tarik Simpanan\n3. Tambah Pinjaman\n4. Kembali ke list\n========================================================================");
+                    System.out.println("PINJAMAN \t : ");
+                    System.out.println("==================MENU NASABAH===================\n1. Tambah Simpanan\n2. Tarik Simpanan\n3. Tambah Pinjaman\n4. Kembali\n========================================================================");
                     System.out.print("Pilih menu (1-4): ");
                     choice = scanner.nextInt();
                     scanner.nextLine();
@@ -79,7 +87,7 @@ public class Nasabah {
                     switch (choice) {
                         case 1:
                             System.out.print("Pilih menu 1 ");
-                            tabungan.tambahSaldo(10);
+                            tabungan.tambahSaldo(Tabungan.TambahTabungan().getSaldo());
 
                             break;
                         case 2:
@@ -91,9 +99,10 @@ public class Nasabah {
 
                             break;
                         case 4:
-                            Nasabah.infoNasabah(nasabahList);
+                        Nasabah.infoNasabah(nasabahList);
 
                             break;
+                      
                         default:
                             System.out.println("Pilihan tidak valid.");
                     }
