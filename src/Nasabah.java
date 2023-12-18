@@ -9,9 +9,6 @@ public class Nasabah {
     String alamat;
     String nomorRekening;
 
-    // double saldo;
-    // double pinjaman = 0;
-
     Tabungan tabungan; 
 
     public Nasabah(String nama, String userId, String alamat) {
@@ -20,8 +17,6 @@ public class Nasabah {
         this.alamat = alamat;
         this.nomorRekening = generateNomorRekening();
         this.tabungan = new Tabungan(0, 0); 
-        // this.saldo = saldo;
-        // this.pinjaman = pinjaman;
     }
 
     public Tabungan getTabungan() {
@@ -72,34 +67,38 @@ public class Nasabah {
 
             Nasabah nasabah = findNasabah(userId, nasabahList);
             if (nasabah != null) {
-                Tabungan tabungan = nasabah.getTabungan(); 
-
+                Tabungan tabungan = nasabah.getTabungan();
 
                 int choice;
                 do {
+                    System.out.println("NASABAH \t : " + nasabah.nama);
                     System.out.println("SALDO \t \t : " + tabungan.getSaldo());
-                    System.out.println("PINJAMAN \t : ");
-                    System.out.println("==================MENU NASABAH===================\n1. Tambah Simpanan\n2. Tarik Simpanan\n3. Tambah Pinjaman\n4. Kembali\n========================================================================");
-                    System.out.print("Pilih menu (1-4): ");
+                    System.out.println("PINJAMAN \t : " + tabungan.getPinjaman());
+                    System.out.println("==================MENU NASABAH===================\n1. Tambah Simpanan\n2. Tarik Simpanan\n3. Tambah Pinjaman\n4. Bayar Pinjaman\n5. Kembali\n========================================================================");
+                    System.out.print("Pilih menu (1-5): ");
                     choice = scanner.nextInt();
                     scanner.nextLine();
         
                     switch (choice) {
                         case 1:
-                            System.out.print("Pilih menu 1 ");
-                            tabungan.tambahSaldo(Tabungan.TambahTabungan().getSaldo());
+                            tabungan.tambahSaldo(Tabungan.addSaldo().getSaldo());
 
                             break;
                         case 2:
-                            System.out.print("Pilih menu 2 ");
+                            tabungan.tarikSaldo(Tabungan.addSaldo().getSaldo());
 
                             break;
                         case 3:
-                            System.out.print("Pilih menu 3");
+                            tabungan.tambahPinjaman(Tabungan.addPinjaman(tabungan.saldo).getPinjaman());
 
                             break;
                         case 4:
-                        Nasabah.infoNasabah(nasabahList);
+                            tabungan.bayarPinjaman(Tabungan.addPinjaman(tabungan.saldo).getPinjaman());
+
+                            break;
+
+                        case 5:
+                            Nasabah.infoNasabah(nasabahList);
 
                             break;
                       
@@ -107,7 +106,7 @@ public class Nasabah {
                             System.out.println("Pilihan tidak valid.");
                     }
                     scanner.nextLine();  
-                } while (choice != 4);
+                } while (choice != 5);
 
             } else {
                 System.out.println("Nasabah dengan User ID " + userId +

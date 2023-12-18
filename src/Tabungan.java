@@ -1,10 +1,7 @@
-// import java.util.ArrayList;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Tabungan {
     static Scanner scanner = new Scanner(System.in);
-
     
     double saldo;
     double pinjaman;
@@ -12,20 +9,41 @@ public class Tabungan {
     public Tabungan() {
         
     }
-
-
+    
     public Tabungan( double saldo, double pinjaman) {
         this.saldo = saldo;
         this.pinjaman = pinjaman;
     }
 
     public static Tabungan TambahTabungan() {
-        System.out.print("Saldo Awal: ");
+        System.out.print("Masukkan nominal : ");
+        double saldoAwal = scanner.nextDouble();
+
+        System.out.print("Masukkan nominal : ");
+        double pinjaman = scanner.nextDouble();
+
+        Tabungan tabungan = new Tabungan(saldoAwal, pinjaman);
+
+        return tabungan;
+    }
+    
+    public static Tabungan addSaldo() {
+        System.out.print("Masukkan nominal : ");
         double saldoAwal = scanner.nextDouble();
 
         double pinjaman = 0;
 
         Tabungan tabungan = new Tabungan(saldoAwal, pinjaman);
+
+        return tabungan;
+    }
+
+    public static Tabungan addPinjaman(double saldo) {
+
+        System.out.print("Masukkan nominal : ");
+        double pinjaman = scanner.nextDouble();
+
+        Tabungan tabungan = new Tabungan(saldo, pinjaman);
 
         return tabungan;
     }
@@ -38,29 +56,6 @@ public class Tabungan {
         return pinjaman;
     }
 
-
-    public static void infoTabungan(ArrayList<Tabungan> tabunganList) {
-        if (tabunganList.isEmpty()) {
-            System.out.println("Belum ada nasabah yang terdaftar.");
-        } else {
-            System.out.println("\n\n=================================================================");
-            System.out.printf("%-15s %-15s %-15s %-25s %-15s %-10s\n", "USERID",
-                    "NAMA", "ALAMAT", "NOREK", "SALDO", "PINJAMAN");
-            for (Tabungan tabungan : tabunganList) {
-                System.out.printf("%-15s %-15s \n",
-                        tabungan.saldo, tabungan.pinjaman
-                        // , tabungan.alamat,
-                        // tabungan.nomorRekening
-                        // ,   %-15.2f %-10.2f
-                        // nasabah.saldo,nasabah.pinjaman
-                        
-                        );
-            }
-            System.out.println("=================================================================");
-        }
-    }
-
-
     public void tambahSaldo(double jumlah) {
         this.saldo += jumlah;
         System.out.println("Saldo berhasil ditambahkan.");
@@ -72,14 +67,23 @@ public class Tabungan {
     }
 
     public void tarikSaldo(double jumlah) {
-        this.saldo -= jumlah;
-        System.out.println("Saldo berhasil ditarik.");
+        
+        if (this.saldo < jumlah) {
+            System.out.println("Saldo anda kurang, transaksi dibatalkan");
+        }else{
+            this.saldo -= jumlah;
+            System.out.println("Saldo berhasil ditarik.");
+        }
     }
 
     public void bayarPinjaman(double jumlah) {
-        this.pinjaman -= jumlah;
-        System.out.println("Pinjaman berhasil dibayar.");
-    }
 
+        if(this.pinjaman < jumlah){
+            System.out.println("Pembayaran pinjaman lebih, transaksi dibatalkan");
+        }else{
+            this.pinjaman -= jumlah;
+            System.out.println("Pinjaman berhasil dibayar.");
+        }
+    }
 
 }
