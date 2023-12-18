@@ -65,13 +65,13 @@ public class Nasabah {
 
             Nasabah nasabah = findNasabah(userId, nasabahList);
             if (nasabah != null) {
-
+                Tabungan tabungan = new Tabungan();
 
                 int choice;
                 do {
-                    System.out.println("SALDO \t \t : ");
-                    System.out.println("PINJAMAN \t : ");
-                    System.out.println("==================MENU NASABAH===================\n1. Tambah Simpanan\n2. Tarik Simpanan\n3. Tambah Pinjaman\n4. Bayar Pinjaman\n========================================================================");
+                    System.out.println("SALDO \t \t : " + tabungan.getSaldo());
+                    System.out.println("PINJAMAN \t : " + tabungan.getPinjaman());
+                    System.out.println("==================MENU NASABAH===================\n1. Tambah Simpanan\n2. Tarik Simpanan\n3. Tambah Pinjaman\n4. Kembali ke list\n========================================================================");
                     System.out.print("Pilih menu (1-4): ");
                     choice = scanner.nextInt();
                     scanner.nextLine();
@@ -79,6 +79,7 @@ public class Nasabah {
                     switch (choice) {
                         case 1:
                             System.out.print("Pilih menu 1 ");
+                            tabungan.tambahSaldo(10);
 
                             break;
                         case 2:
@@ -90,7 +91,7 @@ public class Nasabah {
 
                             break;
                         case 4:
-                            System.out.print("Pilih menu 4 ");
+                            Nasabah.infoNasabah(nasabahList);
 
                             break;
                         default:

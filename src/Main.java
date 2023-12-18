@@ -21,7 +21,6 @@ public class Main {
                     break;
                 case 2:
                     Nasabah.infoNasabah(nasabahList);
-
                     break;
                 case 3:
                     Nasabah.hapusNasabah(nasabahList, scanner);

@@ -9,6 +9,11 @@ public class Tabungan {
     double saldo;
     double pinjaman;
 
+    public Tabungan() {
+        
+    }
+
+
     public Tabungan( double saldo, double pinjaman) {
         this.saldo = saldo;
         this.pinjaman = pinjaman;
@@ -28,6 +33,7 @@ public class Tabungan {
     public double getSaldo(){
         return saldo;
     }
+    
     public double getPinjaman(){
         return pinjaman;
     }
